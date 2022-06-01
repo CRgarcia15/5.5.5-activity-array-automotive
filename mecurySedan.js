@@ -56,3 +56,11 @@ class Car extends VehicleModule {
          }
     }
 }
+
+let murc = new Car('Mercury', 'Sedan', '2002', 'White', 5000)
+murc.start()
+murc.loadPassenger(5)
+murc.stop()
+murc.checkService()
+
+console.log(murc)
