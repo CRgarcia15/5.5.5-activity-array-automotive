@@ -1,9 +1,4 @@
-//this includes the vehicle class as a module
-const VehicleModule = require("./vehicle").vehichle
-
-//this shows how to call from this module...
-let v = new VehicleModule.Vehicle("Mecury", "Sedan", "1965", "color", "mileage");
-console.log(v.make)
+const VehicleModule = require('./vehicle.js').Vehicle
 
 class Car extends VehicleModule {
     constructor(make, model, year, color, mileage) {
@@ -16,51 +11,46 @@ class Car extends VehicleModule {
         this.scheduleService = false;
     }
 
-//passenger loading 
-    loadPassenger(num) {
-
-        let pass = 0;
-
-        while(pass < this.maxPassengers){
-            if (this.passenger < this.maxPassengers) {
-                console.log('There is still room')
-            }
-                else {
-                    console.log('Your Vehicle is full')
-                }
-            pass++;
+    checkService() {
+        if (this.mileage > 30000) {            
+            this.scheduleService = true
+            return this.scheduleService;                       
         }
     }
 
-//start engine
     start() {
-        if (this.fuel > 0) {
-            console.log("Your vehicle has started!");
-            return start == true;
-        }
-        else {
-            console.log("You don't have enough gas!")
-            return start == false;
+        if (this.fuel > 0) {            
+            console.log("engine has started.");
+            return this.started = true
+        } else {
+            console.log("no fuel");
+            return this.started = false;
         }
     }
 
-//service scheduling 
-    scheduleService(mileage) {
-        if (mileage > 3000) {
-            console.log("You need service!")
-           return maintanence == true;
+    loadPassenger(num) {
+        if (this.passenger < this.maxPassengers) {
+            if ((num + this.passenger) <= this.maxPassengers) {
+                this.passenger = num;
+                return this.passenger;               
+            } else {
+                console.log(this.model + " " + this.make + " not have enough space to take all passengers.");
+
+            }
+        } else {
+            console.log(this.model + " " + this.make + " is full");
         }
-         else {
-             console.log("You don't need service")
-             return maintanence == false
-         }
     }
+
+
 }
 
-let murc = new Car('Mercury', 'Sedan', '2002', 'White', 5000)
-murc.start()
-murc.loadPassenger(5)
-murc.stop()
-murc.checkService()
 
-console.log(murc)
+let myCar = new Car('mercury', 'rad_sedan', '2002', 'white', 50000)
+
+myCar.start()
+myCar.loadPassenger(5)
+myCar.stop()
+myCar.checkService()
+
+console.log(myCar)
